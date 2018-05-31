@@ -1,0 +1,6 @@
+# Policy is to target latest LTS (long term support) and current version of node.js.
+
+language: node_js
+node_js:
+  - "node"
+  - "8"  # LTS until April 2019

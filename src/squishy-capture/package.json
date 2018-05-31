@@ -1,0 +1,39 @@
+{
+  "name": "squishy-capture",
+  "version": "0.0.1",
+  "description": "Express.js App to capture metrics.",
+  "main": "src/index.js",
+  "bin": "src/main.js",
+  "scripts": {
+    "start": "forever --spinSleepTime 250 --minUptime 1000 src/main.js",
+    "inspector": "pouchdb-server --dir ./dbs",
+    "test": "eslint ./src/** ./spec/** && jasmine && istanbul cover jasmine",
+    "clean": "rm -rf node_modules coverage .unit-test-dbs ./legion-capture.pouchdb"
+  },
+  "author": "Christopher Lane Hinson <lane@webperformance.com>",
+  "license": "APSL-2.0",
+  "devDependencies": {
+    "eslint": "^4.19.1",
+    "eslint-plugin-promise": "^3.8.0",
+    "istanbul": "^0.4.5",
+    "jasmine": "^3.0.0",
+    "rimraf": "^2.5.2"
+  },
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.3",
+    "forever": "^0.15.2",
+    "fs-extra": "^6.0.1",
+    "jsonschema": "^1.2.4",
+    "squishy-metrics": "0.0.1",
+    "node-fetch": "^2.1.2",
+    "promise-delay": "^2.1.0",
+    "uuid": "^3.1.0"
+  },
+  "optionalDependencies": {
+    "lokijs": "^1.5.5",
+    "pouchdb": "^6.4.1",
+    "pouchdb-server": "^4.0.0",
+    "pouchdb-upsert": "^2.2.0"
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "private": true,
+  "scripts": {
+    "bootstrap": "lerna bootstrap",
+    "test": "lerna run test --concurrency 1",
+    "clean": "lerna run clean && rm -rf node_modules"
+  },
+  "devDependencies": {
+    "lerna": "^2.11.0"
+  }
+}
