@@ -1,6 +1,6 @@
 {
   "name": "squishy-ui",
-  "version": "0.0.2-1",
+  "version": "0.0.2",
   "description": "Squishy Metrics: GUI interface",
   "main": "src/express.js",
   "browser": "src/App/index.js",
@@ -10,16 +10,16 @@
     "test": "eslint ./src ./spec",
     "clean": "rm -rf node_modules coverage dist .cache"
   },
-  "author": "Christopher Lane Hinson <lane@webperformance.com>",
-  "license": "APSL-2.0",
+  "author": "Christopher Lane Hinson <clanehin@gmail.com>",
+  "license": "ISC",
   "dependencies": {
     "classnames": "^2.2.5",
     "csv-stringify": "^3.0.0",
     "promise-delay": "^2.1.0",
     "react": "^16.4.0",
     "react-dom": "^16.4.0",
-    "squishy-capture": "^0.0.2-1",
-    "squishy-metrics": "^0.0.2-1",
+    "squishy-capture": "^0.0.2",
+    "squishy-metrics": "^0.0.2",
     "uuid": "^3.2.1"
   },
   "devDependencies": {

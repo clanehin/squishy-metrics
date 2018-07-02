@@ -1,13 +1,13 @@
 {
   "name": "squishy-metrics",
-  "version": "0.0.2-1",
+  "version": "0.0.2",
   "description": "Generate samples and merge them into a metrics storage object. Part of the Legion load testing framework.",
   "main": "src/index.js",
   "scripts": {
     "test": "eslint ./src ./spec && jasmine && istanbul cover jasmine",
     "clean": "rm -rf node_modules coverage"
   },
-  "author": "Christopher Lane Hinson <lane@webperformance.com>",
+  "author": "Christopher Lane Hinson <clanehin@gmail.com>",
   "license": "ISC",
   "dependencies": {
     "csv-stringify": "^3.0.0",

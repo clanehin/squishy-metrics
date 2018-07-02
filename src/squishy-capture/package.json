@@ -1,6 +1,6 @@
 {
   "name": "squishy-capture",
-  "version": "0.0.2-1",
+  "version": "0.0.2",
   "description": "Express.js App to capture metrics.",
   "main": "src/index.js",
   "bin": "src/main.js",
@@ -10,8 +10,8 @@
     "test": "eslint ./src/** ./spec/** && jasmine && istanbul cover jasmine",
     "clean": "rm -rf node_modules coverage .unit-test-dbs ./squishy-capture.pouchdb"
   },
-  "author": "Christopher Lane Hinson <lane@webperformance.com>",
-  "license": "APSL-2.0",
+  "author": "Christopher Lane Hinson <clanehin@gmail.com>",
+  "license": "ISC",
   "devDependencies": {
     "eslint": "^4.19.1",
     "eslint-plugin-promise": "^3.8.0",
@@ -27,7 +27,7 @@
     "jsonschema": "^1.2.4",
     "node-fetch": "^2.1.2",
     "promise-delay": "^2.1.0",
-    "squishy-metrics": "^0.0.2-1",
+    "squishy-metrics": "^0.0.2",
     "uuid": "^3.1.0"
   },
   "optionalDependencies": {
