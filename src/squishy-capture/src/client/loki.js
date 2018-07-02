@@ -6,7 +6,7 @@ const metrics = require('squishy-metrics');
 const validate = require('../common/validate');
 
 const LokiStorage = {
-  _type : 'legion-capture:LokiStorage'
+  _type : 'squishy-capture:LokiStorage'
 };
 
 module.exports.prototype = LokiStorage;

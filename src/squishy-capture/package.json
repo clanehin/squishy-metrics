@@ -8,7 +8,7 @@
     "start": "forever --spinSleepTime 250 --minUptime 1000 src/main.js",
     "inspector": "pouchdb-server --dir ./dbs",
     "test": "eslint ./src/** ./spec/** && jasmine && istanbul cover jasmine",
-    "clean": "rm -rf node_modules coverage .unit-test-dbs ./legion-capture.pouchdb"
+    "clean": "rm -rf node_modules coverage .unit-test-dbs ./squishy-capture.pouchdb"
   },
   "author": "Christopher Lane Hinson <lane@webperformance.com>",
   "license": "APSL-2.0",

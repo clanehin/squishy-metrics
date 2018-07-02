@@ -8,7 +8,7 @@ const MetricsTarget = {
   _metrics : Promise.resolve(null),
   _problems : 0,
   _merge : function() { throw new Error('MetricsTarget._merge: not defined'); },
-  _type : 'legion-metrics/MetricsTarget'
+  _type : 'squishy-metrics/MetricsTarget'
 };
 
 MetricsTarget.receiver = function() {
@@ -46,7 +46,7 @@ MetricsTarget.getProblemCount = function() {
 const MetricsReceiver = {
   _target : undefined,
   _tags : immutable.Set(),
-  _type : 'legion-metrics/MetricsReceiver'
+  _type : 'squishy-metrics/MetricsReceiver'
 };
 
 MetricsReceiver.incrementProblems = function() {
@@ -89,7 +89,7 @@ module.exports.create = function(algorithm, callback) {
     algorithm = algorithm.algorithm.bind(algorithm);
 
   if( typeof algorithm !== 'function' )
-    throw new Error('MetricsTarget.create(merge): must provide a metrics merge algorithm (usually require("legion-metrics").merge.algorithm');
+    throw new Error('MetricsTarget.create(merge): must provide a metrics merge algorithm (usually require("squishy-metrics").merge.algorithm');
 
   if( callback && typeof callback !== 'function' )
     throw new Error('MetricsTarget.create(merge,callback): callback must be a function');

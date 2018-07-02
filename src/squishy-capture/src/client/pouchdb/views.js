@@ -34,7 +34,7 @@ module.exports.mergeAlgorithm =
   '};';
 
 module.exports.design_document = {
-  _id: '_design/legion-capture',
+  _id: '_design/squishy-capture',
   language: 'javascript',
 
   views: {

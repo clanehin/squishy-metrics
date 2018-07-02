@@ -8,7 +8,7 @@ const addDesignDocuments = require('./views');
 const validate = require('../../common/validate');
 
 const PouchDBStorage = {
-  _type : 'legion-capture:PouchDBStorage',
+  _type : 'squishy-capture:PouchDBStorage',
   _inited : false
 };
 
@@ -64,7 +64,7 @@ PouchDBStorage.getMetrics = function(by) {
   }
 
   return this._init()
-    .then(() => this._pouch.query('legion-capture/' + view, query))
+    .then(() => this._pouch.query('squishy-capture/' + view, query))
     .then(results => results.rows.map(x => x.value))
     .then(results => mergeResults(results, by));
 };

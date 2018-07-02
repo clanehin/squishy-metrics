@@ -7,7 +7,7 @@ const uuid = require('uuid');
 
 fs.ensureDirSync('./.unit-test-dbs');
 
-describe('The legion-capture server', function() {
+describe('The squishy-capture server', function() {
   beforeEach(function() {
     this.port = 4312;
     this.server = capture.server.metrics(capture.client.pouchdb.create('./.unit-test-dbs/' + uuid.v4())).listen(this.port);
@@ -28,8 +28,8 @@ describe('The legion-capture server', function() {
   forEach(key => {
     it('can POST blobs of metrics over time and get them back according to time index | ' + key, function(done) {
       const x = metrics.sample({ x: { value : 25 } });
-      const legion_client = this[key];
-      const post = (minute) => legion_client.postMetrics({
+      const squishy_client = this[key];
+      const post = (minute) => squishy_client.postMetrics({
         data: x.summarize(), 
         metadata: {
           project_key: 'my-project-key',
@@ -52,26 +52,26 @@ describe('The legion-capture server', function() {
       posts.push(post(4));
 
       Promise.all(posts).then(() => {
-        return legion_client.getMetrics({ project_key: 'my-project-key', minutes: 0 });
+        return squishy_client.getMetrics({ project_key: 'my-project-key', minutes: 0 });
       }).then(json => {
         expect(json.data.values.x.$avg.avg).toBe(25);
         expect(json.data.values.x.$avg.size).toBe(4);
       }).then(() => {
-        return legion_client.getMetrics({ project_key: 'my-project-key', minutes: 1 });
+        return squishy_client.getMetrics({ project_key: 'my-project-key', minutes: 1 });
       }).then(json => {
         expect(json.data).toBe(null);
       }).then(() => {
-        return legion_client.getMetrics({ project_key: 'my-project-key', minutes: 2 });
+        return squishy_client.getMetrics({ project_key: 'my-project-key', minutes: 2 });
       }).then(json => {
         expect(json.data.values.x.$avg.avg).toBe(25);
         expect(json.data.values.x.$avg.size).toBe(2);
       }).then(() => {
-        return legion_client.getMetrics({ project_key: 'my-project-key', minutes: 3 });
+        return squishy_client.getMetrics({ project_key: 'my-project-key', minutes: 3 });
       }).then(json => {
         expect(json.data.values.x.$avg.avg).toBe(25);
         expect(json.data.values.x.$avg.size).toBe(1);
       }).then(() => {
-        return legion_client.getMetrics({ project_key: 'my-project-key', minutes: 4 });
+        return squishy_client.getMetrics({ project_key: 'my-project-key', minutes: 4 });
       }).then(json => {
         expect(json.data.values.x.$avg.avg).toBe(25);
         expect(json.data.values.x.$avg.size).toBe(4);
@@ -80,8 +80,8 @@ describe('The legion-capture server', function() {
 
     it('can POST blobs of metrics over time and get them back as an array | ' + key, function(done) {
       const x = metrics.sample({ x: { value : 25 } });
-      const legion_client = this[key];
-      const post = (minute) => legion_client.postMetrics({
+      const squishy_client = this[key];
+      const post = (minute) => squishy_client.postMetrics({
         data: x.summarize(), 
         metadata: {
           project_key: 'my-project-key',
@@ -104,7 +104,7 @@ describe('The legion-capture server', function() {
       posts.push(post(13));
 
       Promise.all(posts).then(() => {
-        return capture.get(legion_client).byMinutes({ project_key: 'my-project-key' });
+        return capture.get(squishy_client).byMinutes({ project_key: 'my-project-key' });
       }).then(results => {
         // just flatten the promises into one object
         return results.all.then(all =>

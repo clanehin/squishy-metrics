@@ -1,6 +1,6 @@
 'use strict';
 
-// This is the legion metrics merge algorithm. It combines two objects (which both contain summary statistics) into one.
+// This is the squishy metrics merge algorithm. It combines two objects (which both contain summary statistics) into one.
 //
 // The algorithm looks at key names to determine how elements should be merged. For example, keys that end with $sum should
 // be summed together into one big total.

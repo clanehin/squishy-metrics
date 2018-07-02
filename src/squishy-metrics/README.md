@@ -1,18 +1,15 @@
 
-[![Build Status](https://travis-ci.org/lane-webperformance/legion-metrics.svg?branch=master)](https://travis-ci.org/lane-webperformance/legion-metrics)
-[![Dependency Status](https://gemnasium.com/badges/github.com/lane-webperformance/legion-metrics.svg)](https://gemnasium.com/github.com/lane-webperformance/legion-metrics)
-
-Legion-metrics is a library to capture, merge, and summarize performance
+squishy-metrics is a library to capture, merge, and summarize performance
 metrics from a load test.
 
-	var metrics = require('legion-metrics');
+	var metrics = require('squishy-metrics');
 
 metrics.merge
 -------------
 
 ### metrics.merge.algorithm(l : any, r : any)
 
-Implements the legion merge algorithm.
+Implements the merge algorithm.
 
 Typically, this merges two plain javascript objects by recursively merging their
 members. The merge rule that should be chosen for each member is defined by the

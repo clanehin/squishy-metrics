@@ -1,12 +1,12 @@
 
-Legion Capture
+Squishy Capture
 --------------
 
-Legion-capture is a library and executable that captures statistical
+squishy-capture is a library and executable that captures statistical
 data from external sources. This package contains both the client
 and server components.
 
-	capture = require('legion-capture');
+	capture = require('squishy-capture');
 
 Reference
 ---------
@@ -66,8 +66,7 @@ Starts the capture server. Accepts the same parameters as .listen() on any expre
 
 ### capture.Target
 
-The capturing Target is an instance of the metrics Target from
-[legion-metrics](https://github.com/lane-webperformance/legion-metrics).
+The capturing Target is an instance of the metrics Target from the squishy-metrics package.
 It adds the behavior to push metrics to a capture server at regular
 intervals. As part of each push, the Target is 'clear()ed.' This means
 that such a Target will only contain the metrics for the current
@@ -86,7 +85,7 @@ Metrics will be streamed to the endpoint at regular intervals.
 Networking to the endpoint must be reliable, or data loss will
 occur.
 
- * merge - the merge algorithm object, usually just require('legion-metrics').merge
+ * merge - the merge algorithm object, usually just require('squishy-metrics').merge
  * endpoint - the URL of the metrics collection endpoint
  * interval - the collection interval in milliseconds
 

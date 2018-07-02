@@ -10,7 +10,7 @@ fs.ensureDirSync('./.unit-test-dbs');
 
 jasmine.DEFAULT_TIMEOUT_INTERVAL = 60000;
 
-describe('The legion-capture server', function() {
+describe('The squishy-capture server', function() {
   beforeEach(function() {
     this.port = 4312;
     this.server = capture.server.metrics(capture.client.pouchdb.create('./.unit-test-dbs/' + uuid.v4())).listen(this.port);
@@ -33,26 +33,26 @@ describe('The legion-capture server', function() {
   forEach(key => {
     it('can accept a POST of a blob of metrics | ' + key, function(done) {
       const x = metrics.sample({ x: { value : 25 } });
-      const legion_client = this[key];
+      const squishy_client = this[key];
 
-      legion_client.postMetrics({ data: x.summarize(), metadata: { project_key: 'my-project-key', min_timestamp: 1000, max_timestamp: 2000 }})
+      squishy_client.postMetrics({ data: x.summarize(), metadata: { project_key: 'my-project-key', min_timestamp: 1000, max_timestamp: 2000 }})
         .then(done)
         .catch(done.fail);
     });
 
     it('can GET a null blob of metrics from an uninitialized projectKey | ' + key, function(done) {
-      const legion_client = this[key];
+      const squishy_client = this[key];
 
-      legion_client.getMetrics({ project_key: 'my-project-key' }).then(json => {
+      squishy_client.getMetrics({ project_key: 'my-project-key' }).then(json => {
         expect(json.data).toEqual(null);
       }).then(done).catch(done.fail);
     });
 
     it('can POST a blob of metrics and then GET them back | ' + key, function(done) {
       const x = metrics.sample({ x: { value : 25 } });
-      const legion_client = this[key];
+      const squishy_client = this[key];
 
-      legion_client.postMetrics({
+      squishy_client.postMetrics({
         data: x.summarize(),
         metadata: {
           project_key: 'my-project-key',
@@ -60,7 +60,7 @@ describe('The legion-capture server', function() {
           max_timestamp: 2000
         }
       }).then(() => {
-        return legion_client.getMetrics({ project_key: 'my-project-key' });
+        return squishy_client.getMetrics({ project_key: 'my-project-key' });
       }).then(json => {
         expect(json.data.values.x.$avg.avg).toBe(25);
         expect(json.data.values.x.$avg.size).toBe(1);
@@ -69,8 +69,8 @@ describe('The legion-capture server', function() {
 
     it('can POST a lot of blobs of metrics and then GET them back | ' + key, function(done) {
       const x = metrics.sample({ x: { value : 25 } });
-      const legion_client = this[key];
-      const post = () => legion_client.postMetrics({
+      const squishy_client = this[key];
+      const post = () => squishy_client.postMetrics({
         data: x.summarize(), 
         metadata: {
           project_key: 'my-project-key',
@@ -80,7 +80,7 @@ describe('The legion-capture server', function() {
       });
 
       Promise.all([post(),post(),post(),post(),post()]).then(() => {
-        return legion_client.getMetrics({ project_key: 'my-project-key' });
+        return squishy_client.getMetrics({ project_key: 'my-project-key' });
       }).then(json => {
         expect(json.data.values.x.$avg.avg).toBe(25);
         expect(json.data.values.x.$avg.size).toBe(5);
@@ -89,8 +89,8 @@ describe('The legion-capture server', function() {
 
     it('can POST a lot of idempotent blobs of metrics and then GET only one back | ' + key, function(done) {
       const x = metrics.sample({ x: { value : 25 } });
-      const legion_client = this[key];
-      const post = () => legion_client.postMetrics({
+      const squishy_client = this[key];
+      const post = () => squishy_client.postMetrics({
         data: x.summarize(),
         metadata: { 
           project_key: 'my-project-key',
@@ -101,7 +101,7 @@ describe('The legion-capture server', function() {
       });
 
       Promise.all([post(),post(),post(),post(),post()]).then(() => {
-        return legion_client.getMetrics({ project_key: 'my-project-key' });
+        return squishy_client.getMetrics({ project_key: 'my-project-key' });
       }).then(json => {
         expect(json.data.values.x.$avg.avg).toBe(25);
         expect(json.data.values.x.$avg.size).toBe(1);
@@ -115,8 +115,8 @@ describe('The legion-capture server', function() {
         sample_values['i' + i.toString()] = { value : 25, unit : 'puppies', interpretation : 'quantity of puppies logged' };
 
       const x = metrics.sample(sample_values);
-      const legion_client = this[key];
-      const post = () => legion_client.postMetrics({
+      const squishy_client = this[key];
+      const post = () => squishy_client.postMetrics({
         data: x.summarize(),
         metadata: { 
           project_key: 'my-project-key',
@@ -127,7 +127,7 @@ describe('The legion-capture server', function() {
       });
 
       post().then(() => {
-        return legion_client.getMetrics({ project_key: 'my-project-key' });
+        return squishy_client.getMetrics({ project_key: 'my-project-key' });
       }).then(json => {
         expect(json.data.values.i1265.$avg.avg).toBe(25);
       }).then(done).catch(done.fail);
@@ -148,10 +148,10 @@ describe('The legion-capture server', function() {
   });
 
   it('validates responses that should be empty', function(done) {
-    const legion_client = capture.client.remote.create(this.endpoint);
+    const squishy_client = capture.client.remote.create(this.endpoint);
 
     try {
-      legion_client.validate204Response({ ok: true, status: 200, statusText: 'OK' }, 'expected failure', 'VALIDATE204RESPONSE');
+      squishy_client.validate204Response({ ok: true, status: 200, statusText: 'OK' }, 'expected failure', 'VALIDATE204RESPONSE');
       done.fail();
     } catch(e) {
       expect(e.message).toContain('expected failure');
@@ -161,10 +161,10 @@ describe('The legion-capture server', function() {
   });
 
   it('validates responses that should contain JSON', function(done) {
-    const legion_client = capture.client.remote.create(this.endpoint);
+    const squishy_client = capture.client.remote.create(this.endpoint);
 
     try {
-      legion_client.validate200Response({ ok: true, status: 200, statusText: 'OK' }, '{ "status": "expected failure", "reason": "for testing reasons" }', 'VALIDATE200RESPONSE');
+      squishy_client.validate200Response({ ok: true, status: 200, statusText: 'OK' }, '{ "status": "expected failure", "reason": "for testing reasons" }', 'VALIDATE200RESPONSE');
       done.fail();
     } catch(e) {
       expect(e.message).toContain('expected failure');
